@@ -1,7 +1,4 @@
-import dotenv from 'dotenv'
-// 加载环境变量
-dotenv.config()
-const env = dotenv.config().parsed // 环境参数
+import { getGptReply } from '../openai/index.js'
 
 // 从环境变量中导入机器人的名称
 const botName = '薯条'
@@ -10,12 +7,10 @@ const botName = '薯条'
 const autoReplyPrefix = '@薯条'
 
 // 从环境变量中导入联系人白名单
-const aliasWhiteList = env.ALIAS_WHITELIST ? env.ALIAS_WHITELIST.split(',') : []
+const aliasWhiteList = []
 
 // 从环境变量中导入群聊白名单
-const roomWhiteList = env.ROOM_WHITELIST ? env.ROOM_WHITELIST.split(',') : []
-
-import { getServe } from './serve.js'
+const roomWhiteList = []
 
 /**
  * 默认消息发送
@@ -25,7 +20,7 @@ import { getServe } from './serve.js'
  * @returns {Promise<void>}
  */
 export async function defaultMessage(msg, bot, ServiceType = 'GPT') {
-  const getReply = getServe(ServiceType)
+  const getReply = getGptReply
   const contact = msg.talker() // 发消息人
   const receiver = msg.to() // 消息接收人
   const content = msg.text() // 消息内容
@@ -46,12 +41,13 @@ export async function defaultMessage(msg, bot, ServiceType = 'GPT') {
     // 区分群聊和私聊
     // 群聊消息去掉艾特主体后，匹配自动回复前缀
     // if (isRoom && room && content.replace(`${botName}`, '').trimStart().startsWith(`${autoReplyPrefix}`)) {
+    console.log('🌸🌸🌸 / name: ', name)
     if (isRoom && room && content.trimStart().startsWith(`${autoReplyPrefix}`)) {
       const question = (await msg.mentionText()) || content.replace(`${botName}`, '').replace(`${autoReplyPrefix}`, '') // 去掉艾特的消息主体
       console.log('🌸🌸🌸 / question: ', question)
       await room.say('汪汪汪！请稍等')
       const response = await getReply(question)
-      await room.say(response)
+      await room.say(`@${name} ${response}`)
     }
     // 私人聊天，白名单内的直接发送
     // 私人聊天直接匹配自动回复前缀

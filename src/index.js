@@ -1,6 +1,5 @@
 import { Command } from 'commander'
 import { WechatyBuilder, ScanStatus, log } from 'wechaty'
-import inquirer from 'inquirer'
 import qrTerminal from 'qrcode-terminal'
 import dotenv from 'dotenv'
 

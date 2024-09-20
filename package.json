@@ -9,10 +9,6 @@
     "format": "prettier --write ./src",
     "start": "node ./cli.js",
     "test": "node ./src/wechaty/testMessage.js",
-    "test-openai": "node ./src/openai/__test__.js",
-    "test-xunfei": "node ./src/xunfei/__test__.js",
-    "test-kimi": "node ./src/kimi/__test__.js",
-    "test-dify": "node ./src/dify/__test__.js",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -33,8 +29,6 @@
     "commander": "^12.0.0",
     "crypto-js": "^4.2.0",
     "dotenv": "^16.4.5",
-    "inquirer": "^9.2.16",
-    "openai": "^4.52.0",
     "p-timeout": "^6.0.0",
     "qrcode-terminal": "^0.12.0",
     "remark": "^14.0.2",

@@ -29,8 +29,8 @@ export async function getGptReply(prompt) {
     const config = setConfig(prompt)
     console.log('🌸🌸🌸 / config: ', config)
     const res = await axios(config)
-    console.log('🌸🌸🌸 / response: ', res)
-    return res?.data?.message?.content
+    console.log('🌸🌸🌸 / response: ', res?.data?.message?.content)
+    return res?.data?.message?.content || '脑袋炸掉啦！'
   } catch (error) {
     console.error(error.code)
     console.error(error.message)
