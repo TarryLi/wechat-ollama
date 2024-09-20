@@ -4,7 +4,8 @@ function setConfig(prompt) {
   return {
     method: 'post',
     maxBodyLength: Infinity,
-    url: 'https://tarrynas.top:3032/api/chat',
+    // url: 'https://tarrynas.top:3032/api/chat',
+    url: 'http:localhost:11434/api/chat',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
