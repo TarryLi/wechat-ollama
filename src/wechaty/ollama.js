@@ -1,7 +1,7 @@
 import { Ollama } from 'ollama'
 
-const host = 'https://tarrynas.top:3032'
-// const host = 'http:192.168.31.50:11434'
+// const host = 'https://tarrynas.top:3032'
+const host = 'http:192.168.31.50:11434'
 
 const ollama = new Ollama({ host })
 
