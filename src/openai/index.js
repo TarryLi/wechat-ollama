@@ -11,7 +11,7 @@ function setConfig(prompt) {
       Accept: 'application/json',
     },
     data: JSON.stringify({
-      model: 'qwen2:7b',
+      model: 'qwen2.5:7b',
       messages: [
         {
           role: 'user',
