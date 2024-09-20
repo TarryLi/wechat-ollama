@@ -1,7 +1,6 @@
 import { Command } from 'commander'
 import { WechatyBuilder, ScanStatus, log } from 'wechaty'
 import qrTerminal from 'qrcode-terminal'
-import dotenv from 'dotenv'
 
 import fs from 'fs'
 import path, { dirname } from 'path'
@@ -10,7 +9,6 @@ import { defaultMessage } from './wechaty/sendMessage.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
-const env = dotenv.config().parsed // 环境参数
 const { version, name } = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../package.json'), 'utf8'))
 
 // 扫码
@@ -122,24 +120,6 @@ function handleStart(type) {
   console.log('🌸🌸🌸 / type: ', type)
   return botStart()
 }
-
-export const serveList = [
-  { name: 'ChatGPT', value: 'ChatGPT' },
-  { name: 'Kimi', value: 'Kimi' },
-  { name: 'Xunfei', value: 'Xunfei' },
-  { name: 'deepseek-free', value: 'deepseek-free' },
-  { name: '302AI', value: '302AI' },
-  { name: 'dify', value: 'dify' },
-  // ... 欢迎大家接入更多的服务
-]
-const questions = [
-  {
-    type: 'list',
-    name: 'serviceType', //存储当前问题回答的变量key，
-    message: '请先选择服务类型',
-    choices: serveList,
-  },
-]
 
 function init() {
   handleStart('ChatGPT')

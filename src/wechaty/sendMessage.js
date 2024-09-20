@@ -1,4 +1,4 @@
-import { getGptReply } from '../openai/index.js'
+import { getOllamaReply } from './ollama.js'
 
 // 从环境变量中导入机器人的名称
 const botName = '薯条'
@@ -20,7 +20,7 @@ const roomWhiteList = []
  * @returns {Promise<void>}
  */
 export async function defaultMessage(msg, bot, ServiceType = 'GPT') {
-  const getReply = getGptReply
+  const getReply = getOllamaReply
   const contact = msg.talker() // 发消息人
   const receiver = msg.to() // 消息接收人
   const content = msg.text() // 消息内容
