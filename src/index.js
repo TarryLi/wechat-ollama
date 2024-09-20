@@ -121,42 +121,7 @@ process.on('uncaughtException', (err) => {
 function handleStart(type) {
   serviceType = type
   console.log('🌸🌸🌸 / type: ', type)
-  switch (type) {
-    case 'ChatGPT':
-      if (env.OPENAI_API_KEY) return botStart()
-      console.log('❌ 请先配置.env文件中的 OPENAI_API_KEY')
-      break
-    case 'Kimi':
-      if (env.KIMI_API_KEY) return botStart()
-      console.log('❌ 请先配置.env文件中的 KIMI_API_KEY')
-      break
-    case 'Xunfei':
-      if (env.XUNFEI_APP_ID && env.XUNFEI_API_KEY && env.XUNFEI_API_SECRET) {
-        return botStart()
-      }
-      console.log('❌ 请先配置.env文件中的 XUNFEI_APP_ID，XUNFEI_API_KEY，XUNFEI_API_SECRET')
-      break
-    case 'deepseek-free':
-      if (env.DEEPSEEK_FREE_URL && env.DEEPSEEK_FREE_TOKEN && env.DEEPSEEK_FREE_MODEL) {
-        return botStart()
-      }
-      console.log('❌ 请先配置.env文件中的 XUNFEI_APP_ID，XUNFEI_API_KEY，XUNFEI_API_SECRET')
-      break
-    case '302AI':
-      if (env._302AI_API_KEY) {
-        return botStart()
-      }
-      console.log('❌ 请先配置.env文件中的 _302AI_API_KEY')
-      break
-    case 'dify':
-      if (env.DIFY_API_KEY && env.DIFY_URL) {
-        return botStart()
-      }
-      console.log('❌ 请先配置.env文件中的 DIFY_API_KEY')
-      break
-    default:
-      console.log('❌ 服务类型错误, 目前支持： ChatGPT | Kimi | Xunfei')
-  }
+  return botStart()
 }
 
 export const serveList = [
@@ -178,23 +143,7 @@ const questions = [
 ]
 
 function init() {
-  if (env.SERVICE_TYPE) {
-    // 判断env中SERVICE_TYPE是否配置和并且属于serveList数组中value的值
-    if (serveList.find((item) => item.value === env.SERVICE_TYPE)) {
-      handleStart(env.SERVICE_TYPE)
-    } else {
-      console.log('❌ 请正确配置.env文件中的 SERVICE_TYPE，或者删除该项')
-    }
-  } else {
-    inquirer
-      .prompt(questions)
-      .then((res) => {
-        handleStart(res.serviceType)
-      })
-      .catch((error) => {
-        console.log('❌ inquirer error:', error)
-      })
-  }
+  handleStart('ChatGPT')
 }
 
 const program = new Command(name)

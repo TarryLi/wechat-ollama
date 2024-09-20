@@ -4,10 +4,10 @@ dotenv.config()
 const env = dotenv.config().parsed // 环境参数
 
 // 从环境变量中导入机器人的名称
-const botName = env.BOT_NAME
+const botName = '薯条'
 
 // 从环境变量中导入需要自动回复的消息前缀，默认配空串或不配置则等于无前缀
-const autoReplyPrefix = env.AUTO_REPLY_PREFIX ? env.AUTO_REPLY_PREFIX : ''
+const autoReplyPrefix = '@薯条'
 
 // 从环境变量中导入联系人白名单
 const aliasWhiteList = env.ALIAS_WHITELIST ? env.ALIAS_WHITELIST.split(',') : []
